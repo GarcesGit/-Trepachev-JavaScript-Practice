@@ -1,0 +1,60 @@
+
+//Дан textarea. Пусть в него вводится текст. Сделайте так, чтобы по потери фокуса под текстареа вывелось сообщение о том, сколько в этом тексте слов.
+//Модифицируйте предыдущую задачу так, чтобы также вывелось сообщение о том, сколько в тексте символов.
+//Модифицируйте предыдущую задачу так, чтобы также вывелось сообщение о том, сколько в тексте символов за вычетом пробелов.
+//Сделайте 4 чекбокса, которые будут регулировать, какие именно параметры показывать.
+//CSS
+
+<style>
+.hidden {
+	display: none; }
+</style>
+
+//HTML
+<textarea id="textarea"></textarea> <br>
+<input id= "check1" type="checkbox" >
+<p id = 'p1' class= "hidden">  </p> <br>
+<input id= "check2" type="checkbox" >
+<p id = 'p2' class= "hidden">  </p> <br>
+<input id= "check3" type="checkbox" >
+<p id = 'p3' class= "hidden">  </p> <br>
+
+<script>
+let textarea = document.querySelector('#textarea');
+let checkbox1 = document.querySelector('#check1');
+let checkbox2 = document.querySelector('#check2');
+let checkbox3 = document.querySelector('#check3');
+let p1 = document.querySelector('#p1');
+let p2 = document.querySelector('#p2');
+let p3 = document.querySelector('#p3');
+
+checkbox1.addEventListener('click', function() {
+  let text = textarea.value.split(' ');
+  p1.textContent = text.length + ' слов';
+if (checkbox1.checked == true) {
+    p1.classList.remove('hidden')
+  } else {
+    p1.classList.add('hidden')
+  }
+});
+
+  checkbox2.addEventListener('click', function() {
+    let simbol = textarea.value.split('');
+    p2.textContent = simbol.length + ' символов';
+    if (checkbox2.checked == true) {
+        p2.classList.remove('hidden')
+      } else {
+        p2.classList.add('hidden')
+      }
+    });
+
+  checkbox3.addEventListener('click', function() {
+    let simbolNoSpace = textarea.value.replace(/\s/g, "");
+    p3.textContent = simbolNoSpace.length + ' символов без пробелов';
+  if (checkbox3.checked == true) {
+      p3.classList.remove('hidden')
+    } else {
+      p3.classList.add('hidden')
+    }
+});
+</script>
