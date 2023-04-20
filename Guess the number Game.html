@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  <meta charset="utf-8">
+  <title> Guess the number Game </title>
+</head>
+<body>
+
+/*В этой игре компьютер загадывает число от 1 до 100.
+В инпут на экране игрок вводит число от 1 до 100, пытаясь угадать, что же загадал компьютер.*/
+
+<p> Введите число от 1 до 100 </p>
+<input id = "input" >
+<button id = 'button'>TRY</button>
+<div data-num = ""> </div>
+
+<script>
+let input = document.querySelector('#input');
+let button = document.querySelector('#button');
+let div = document.querySelector('div');
+
+let randomNum = Math.floor(Math.random()*100);
+console.log(randomNum);
+
+button.addEventListener('click', function() {
+  let yourNum = input.value;
+  div.dataset.num++;
+  div.textContent = 'Всего попыток: ' + div.dataset.num;
+
+    if (yourNum < randomNum) {
+      alert('введите число ПОБОЛЬШЕ');
+  }
+    else if (yourNum > randomNum) {
+      alert('введите число ПОМЕНЬШЕ');
+    }
+    if (yourNum == randomNum) {
+      alert('!!! УГАДАЛ !!!');
+    }
+    console.log(yourNum);
+});
+
+</script>
+
+</body>
+</html>
