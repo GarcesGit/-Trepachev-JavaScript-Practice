@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+<!-- Линейный календарь
+Сделайте так, чтобы над календарем появились ссылки вперед и назад, позволяющие менять месяц.
+Месяц и год, выводимые над календарем, должны соответствовать отображаемому месяцу.-->
+
+	<style>
+	.wrapper {
+	            display: flex;
+	            flex-direction: column;
+	            align-items: center;
+	        }
+	#list {
+	            list-style: none;
+	            display: flex;
+	            flex-direction: row;
+	        }
+	#list li {
+	            margin-right: 4px;
+							display: inline-block;
+							border: 1px solid;
+							width: 20px;
+							height: 20px;
+							text-align: center;
+							font-size: 15px;
+							margin-top: 10px;
+							margin-bottom: 10px;
+
+	        }
+	.left,
+	.right {
+	            display: inline-block;
+	            width: 30px;
+	            height: 20px;
+	            background-color: pink;
+	            text-align: center;
+	            cursor: pointer;
+	            font-size: 15px;
+	            margin-top: 10px;
+	            margin-bottom: 10px;
+	        }
+</style>
+
+	<div class="wrapper">
+	     <div class="MonthAndYear"></div>
+	     <div class="navigation">
+	         <buton class="left">&#9668;</buton>
+	         <buton class="right">&#9658;</buton>
+	</div>
+	<ul id="list"> </ul>
+
+<script>
+
+	let date = new Date();
+	let list = document.querySelector("#list")
+
+	let showCalendar = function () {
+
+	  let currentDay = date.getDate();
+	  let currentYear = date.getFullYear();
+	  let currentMonth = date.getMonth();
+
+	  let lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+	  let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
+	  let MonthAndYear = document.querySelector('.MonthAndYear');
+	      MonthAndYear.innerHTML = months[currentMonth] + ', ' + currentYear;
+
+	  for (let i = 1; i <= lastDay; i++) {
+	      if (i === new Date().getDate() &&
+	          date.getMonth() === new Date().getMonth()
+	          ) {
+	            let newLiToday = document.createElement('li');
+	            newLiToday.innerHTML = i;
+	            list.appendChild(newLiToday);
+	            newLiToday.style.backgroundColor = 'lightgreen';
+	          } else {
+	            let newLi = document.createElement('li');
+	            newLi.innerHTML = i;
+	            list.appendChild(newLi);
+	          }
+	      }
+	};
+
+	function removeList() {
+	    let ul = document.querySelectorAll('#list li');
+	    for (let li of ul) {
+	        list.removeChild(li);
+	    }
+	};
+
+	document.querySelector(".left").addEventListener("click", function() {
+	    removeList();
+	    date.setMonth(date.getMonth() - 1);
+	    showCalendar();
+	});
+
+	document.querySelector(".right").addEventListener("click", function() {
+	    removeList();
+	    date.setMonth(date.getMonth() + 1);
+	    showCalendar();
+	});
+	showCalendar();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
