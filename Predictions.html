@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+	//Сайт предсказаний
+
+  <style>
+  #parent {
+  	text-align: center;
+  }
+  #parent > * {
+  	margin-bottom: 10px;
+  }
+
+  #timer {
+  	font-size: 18px;
+  }
+  #text {
+  	font-size: 17px;
+  	font-style: italic;
+  }
+
+  .style1 {
+    color: red;
+  }
+
+  .style2 {
+    color: green;
+  }
+
+  button {
+  	padding: 5px 10px;
+  	font-size: 15px;
+  	cursor: pointer;
+  }
+  button:not(.active) {
+  	display: none;
+  }
+  </style>
+
+
+  <div id="parent">
+  	<div id="timer">?</div>
+  	<div id="text"></div>
+  	<button id="start" class="active">узнать свою судьбу</button>
+  	<button id="stop">получить предсказание</button>
+  </div>
+
+
+  <script>
+  let data = [
+  'Лучше полежите весь день на диване сегодня',
+  'Лучше не выходите из дома сегодня',
+  'Устройте сегодня себе выходной - пусть весь мир подождет',
+  'Вы рискуете что-нибудь забыть при выходе из дома сегодня',
+  'Сегодня у вас будет замечательный день',
+  'Сегодня вас ждет удача и успех во всех начинаниях',
+  'Сегодня вас ждет успех при изучении JavaScript',
+  'Сегодня вы найдете неиссякаемый источник изобилия',
+  ];
+
+  let timer = document.querySelector('#timer');
+  let text = document.querySelector('#text');
+  let start = document.querySelector('#start');
+  let stop = document.querySelector('#stop');
+
+  let num=0;
+  start.addEventListener('click', function () {
+  let timerId = setInterval(function() {
+
+    timer.innerHTML = num;
+    num = Math.floor(Math.random()*7-1+1)+1;
+  }, 100);
+
+  start.classList.remove('active');
+  stop.classList.add('active');
+
+  stop.addEventListener('click', function () {
+  for (let i=1; i <= data.length; i++){
+    if (num == i) {
+      text.innerHTML = data[i-1];//чтобы захватил data[0]
+
+      if (i <=3) {
+      text.classList.add('style1');
+    } else {
+      text.classList.add('style2');
+    }
+  }
+      stop.classList.remove('active');
+      clearInterval(timerId);
+    }
+  });
+  });
+
+  </script>
+
+
+  </body>
+</html>
