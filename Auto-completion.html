@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+		//Автодополнение - выпадающая подсказка при вводе текста в инпут
+		<style>
+		#parent {
+			position: relative;
+		}
+		#elem {
+			padding: 5px;
+			font-size: 18px;
+		}
+		#parent ul {
+			position: absolute;
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			background-color: white;
+		}
+		#parent li {
+			border: 1px solid gray;
+			font-size: 18px;
+			padding: 5px;
+		}
+		#parent li:hover {
+			border: 1px solid black;
+			cursor: pointer;
+		}
+		</style>
+
+		<div id="parent">
+			<input id="elem">
+			<ul id="list"></ul>
+		</div>
+		text text text text text
+
+
+		<script>
+		let arr  = ['Belarus', 'Belgium', 'Bermuda','Bulgaria', 'Burkina Faso'];
+		let input = document.querySelector('#elem');
+		let ul = document.querySelector('#list');
+
+		input.addEventListener('input', function () {
+		      ul.innerHTML = '';
+
+		      for (let elem of arr) {
+		      if (elem.startsWith(input.value)) {
+		        let li = document.createElement('li');
+		        li.innerHTML = elem;
+		        ul.appendChild(li);
+
+		      li.addEventListener('click', function() {
+		        input.value = this.innerHTML;
+		        ul.innerHTML = '';
+		      });
+		    }
+		  }
+		});
+		</script>
+
+
+  </body>
+</html>
