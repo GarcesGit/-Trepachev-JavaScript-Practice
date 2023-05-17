@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+	//Игра в города Игра в города Игра в города Игра в города
+	<input id="field">
+	<br>
+	<br>
+	<div id="message"></div>
+
+	<script>
+	let field   = document.querySelector('#field');
+	let message = document.querySelector('#message');
+
+	let cities = [];
+
+	field.addEventListener('keypress', function(event) {
+	  let name = field.value;
+
+	  if (event.key == 'Enter') {
+
+	    if (cities.length === 0) {
+	      cities.push(name);
+	      message.innerHTML = 'OK, следующий игрок';
+
+	  } else {
+
+	  if (checkLetters(cities, name) && !checkName(cities, name) && !checkTabooLetters(name)) {
+	      cities.push(name);
+	      message.innerHTML = 'OK, следующий игрок';
+	      console.log(cities);
+
+	    } else if (!checkLetters(cities, name)) {
+	        message.innerHTML = 'Начните с последней буквы предыдущего города';
+	    } else if (checkName(cities, name)) {
+	        message.innerHTML = 'Проигрыш - такой город уже был';
+	    } else if (checkTabooLetters(name)) {
+	        message.innerHTML = 'Города заканчивающиеся на "ь" и "ы" не разрешены';
+	    } else {
+	        message.innerHTML = '';
+	    }
+
+	  }
+	  field.value = '';
+	}
+
+	});
+
+	function checkTabooLetters(str) {
+	  let lastLetter = str.slice(-1);
+	    if (lastLetter == 'ь' || lastLetter == 'ы')
+	    return true;
+	}
+
+	function checkLetters(arr, str) {
+	   let firstLetter = str.slice(0, 1);
+	   let lastLetter = arr[arr.length - 1].slice(-1);
+
+	   if (firstLetter !== lastLetter) {
+	      return false;
+	   }
+	      return true;
+	}
+
+	function checkName(arr, str) {
+	  return arr.find(elem => elem == str);
+	}
+
+	</script>
+
+
+
+
+
+  </body>
+</html>
