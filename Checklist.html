@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+
+		//Чеклист - программа, которая позволяет сделать список планируемых дел.
+
+		<style>
+		body {
+			text-align: center;
+		}
+		#input, #list {
+			display: inline-block;
+		}
+		#list {
+			padding: 0;
+			list-style-type: none;
+		}
+		#list span {
+			margin-right: 5px;
+		}
+		#list .remove, #list .mark {
+			color: blue;
+			cursor: pointer;
+		}
+		#list .remove:hover, #list .mark:hover {
+			text-decoration: underline;
+		}
+
+		#list .done {
+		  text-decoration: line-through;
+		}
+		</style>
+
+		<input id="input">
+		<ul id="list"></ul>
+
+		<script>
+		let input = document.querySelector('#input');
+		let list = document.querySelector('#list');
+
+		input.addEventListener('keypress', function(event) {
+			if (event.key == 'Enter') {
+				let li = document.createElement('li');
+
+		    let task = document.createElement('span');
+				task.classList.add('task');
+				task.textContent = this.value;
+
+		    task.addEventListener('dblclick', function func() {
+		      let correction = document.createElement('input');
+		      correction.value = this.textContent; //this = task
+		      this.innerHTML = '';
+		      this.appendChild(correction);
+
+					let self = this;
+		        correction.addEventListener('keypress', function() {
+		          if (event.key == 'Enter') {
+		            self.textContent = this.value;//this = correction
+		          }
+		    		});
+		    });
+			li.appendChild(task);
+
+				let remove = document.createElement('span');
+				remove.classList.add('remove');
+				remove.textContent = 'удалить';
+		    remove.addEventListener('click', function() {
+		      li.remove();
+		    });
+				li.appendChild(remove);
+
+				let mark = document.createElement('span');
+				mark.classList.add('mark');
+				mark.textContent = 'сделано';
+		    mark.addEventListener('click', function() {
+		      li.classList.add('done');
+		    });
+		    li.appendChild(mark);
+
+		    list.appendChild(li);
+
+		    this.value = '';
+			}
+		});
+
+		</script>
+
+
+
+  </body>
+</html>
