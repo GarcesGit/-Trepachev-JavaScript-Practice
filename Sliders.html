@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+		//Слайдер текста со стрелками, слайды по кругу.
+		<div id="slider"></div>
+		<a href="#" id="left">←</a>
+		<a href="#" id="right">→</a>
+
+		<script>
+		let texts = ['text1', 'text2', 'text3'];
+
+		let elem = document.querySelector('#slider');
+		let left = document.querySelector('#left');
+		let right = document.querySelector('#right');
+
+		let i=0;
+		elem.textContent = texts[i];
+
+		left.addEventListener('click', function() {
+		  i--;
+		  if (i == -1) {
+		    i = texts.length - 1;
+		  }
+		elem.textContent = texts[i];
+		});
+
+		right.addEventListener('click', function() {
+		  i++;
+		  if (i == texts.length){
+		    i = 0;
+		  }
+		  elem.textContent = texts[i];
+		});
+		</script>
+
+
+
+		//Слайдер картинок через массив
+		<img id="slider" src="">
+
+		<script>
+		let texts = ['1.png', '2.png', '3.png'];
+		let elem = document.querySelector('#slider');
+
+		let i = 1;
+		elem.src = texts[0];
+		window.setInterval(function() {
+		  elem.src = texts[i];
+		  i++;
+
+		  if (i == texts.length) {
+		    i = 0;
+		  }
+		}, 1000);
+		</script>
+
+
+
+
+
+  </body>
+</html>
