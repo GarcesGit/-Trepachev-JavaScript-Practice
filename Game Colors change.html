@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title> ... </title>
+  </head>
+  <body>
+
+
+		//Игра смена цветов Игра смена цветов
+
+
+		<style>
+		#field td {
+			width: 50px;
+			height: 50px;
+			border: 1px solid black;
+			text-align: center;
+			font-weight: bold;
+		}
+		.red {
+			background: red;
+		}
+		.green {
+			background: green;
+		}
+		.blue {
+			background: blue;
+		}
+
+		</style>
+
+		<table id="field"></table>
+		<p>Clicks: 0</p>
+
+		<script>
+		let rows = 3;
+		let cols = 3;
+		let colors = ['red', 'green', 'blue'];
+		let table = document.querySelector('#field');
+		let p = document.querySelector('p');
+
+
+		function createTable(rows, cols) {
+		for (let i = 0; i < rows; i++){
+		  let tr = document.createElement('tr');
+		  for (let i = 0; i < cols; i++){
+		    let td = document.createElement('td');
+		    td.classList.add (getColor(colors));
+		    tr.append(td);
+		  }
+
+		  field.append(tr);
+		}
+		}
+		createTable(rows, cols);
+
+
+		function getColor(arr){
+		  return arr[Math.floor(Math.random()* arr.length)];
+		}
+
+		let tds = document.querySelectorAll('#field td');
+		let clicks = 1;
+
+		for (let td of tds){
+		  td.addEventListener('click', function () {
+		    p.innerHTML = 'Clicks: ' + clicks;
+		    let currentColor = this.getAttribute('class');
+		    this.setAttribute('class', changeColor(colors, currentColor));
+		    let nextColor = this.getAttribute('class');
+
+		    checkWin(tds, nextColor);
+
+		    clicks++;
+		  });
+		}
+
+		function changeColor(arr, el){
+		  for (let i = 0; i < arr.length; i++){
+		    if (i == arr.length-1){
+		      return arr[0];
+		    }
+		    if (arr[i] == el){
+		      return arr[i+1];
+		    }
+		  }
+		}
+
+		function checkWin (cells, el){
+		  let i=0;
+		  for (let cell of cells){
+		    if (cell.classList.contains(el)){
+		      ++i;
+		    }
+		  }
+		}
+
+		</script>
+
+
+
+
+
+  </body>
+</html>
